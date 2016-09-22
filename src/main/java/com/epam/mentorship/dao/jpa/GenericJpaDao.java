@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.epam.mentorship.dao.GenericDao;
+import com.epam.mentorship.exception.DatabaseException;
 import com.epam.mentorship.model.BaseEntity;
 
 public class GenericJpaDao<T extends BaseEntity<ID>, ID extends Serializable> implements GenericDao<T, ID> {
@@ -22,7 +23,7 @@ public class GenericJpaDao<T extends BaseEntity<ID>, ID extends Serializable> im
 	@Override
 	public T update(T entity) {
 		if (getById(entity.getId()) == null) {
-			throw new RuntimeException("Entity doesn't exist");
+			throw new DatabaseException("Entity doesn't exist");
 		}
 		database.put(entity.getId(), entity);
 		return entity;
@@ -32,7 +33,7 @@ public class GenericJpaDao<T extends BaseEntity<ID>, ID extends Serializable> im
 	public void delete(ID id) {
 		T removed = database.remove(id);
 		if (removed == null) {
-			throw new RuntimeException("Entity doesn't exist");
+			throw new DatabaseException("Entity doesn't exist");
 		}
 	}
 

@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.epam.mentorship.dao.MentorshipProgramDao;
 import com.epam.mentorship.model.MentorshipProgram;
+import com.epam.mentorship.service.MentorshipProgramService;
 
 @Service
-public class MentorshipProgramServiceImpl {
+public class MentorshipProgramServiceImpl implements MentorshipProgramService {
 	@Autowired
 	private MentorshipProgramDao mentorshipProgramDao;
 

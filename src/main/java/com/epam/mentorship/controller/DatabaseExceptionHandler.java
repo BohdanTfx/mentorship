@@ -3,10 +3,13 @@ package com.epam.mentorship.controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.epam.mentorship.exception.DatabaseException;
+
+@ControllerAdvice
 public class DatabaseExceptionHandler {
 
-	@ExceptionHandler(RuntimeException.class)
-	public String handle(RuntimeException e) {
-		return "Some errors occurred...";
+	@ExceptionHandler(DatabaseException.class)
+	public String handle(DatabaseException e) {
+		return "databaseError";
 	}
 }

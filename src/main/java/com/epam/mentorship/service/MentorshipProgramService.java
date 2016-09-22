@@ -9,7 +9,7 @@ public interface MentorshipProgramService {
 
 	MentorshipProgram update(MentorshipProgram entity);
 
-	void delete(MentorshipProgram entity);
+	void delete(Long id);
 
 	MentorshipProgram findById(Long id);
 

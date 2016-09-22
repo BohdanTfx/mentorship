@@ -13,8 +13,10 @@ import com.epam.mentorship.service.UserService;
 public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserDao userDao;
+	private Long inc = 0L;
 	
 	public User save(User entity) {
+		entity.setId(++inc);
 		return userDao.save(entity);
 	}
 
