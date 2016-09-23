@@ -2,10 +2,21 @@ package com.epam.mentorship.model;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MentorshipProgram extends BaseEntity<Long> {
+	@XmlElement
 	private String title;
+	@XmlElement
 	private User head;
+	@XmlElement
 	private Technology technology;
+	@XmlElement
 	private List<User> participants;
 
 	public String getTitle() {
