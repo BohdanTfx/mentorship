@@ -9,9 +9,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -27,11 +27,12 @@ import com.epam.mentorship.service.UserService;
 import com.epam.mentorship.util.DtoEntityConverter;
 
 @Controller
-@RequestMapping(path = "/api/users", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+@RequestMapping(path = "/api/users")
 public class UserController {
 	@Autowired
 	private UserService userService;
-	@Autowired DtoEntityConverter dtoEntityConverter;
+	@Autowired
+	DtoEntityConverter dtoEntityConverter;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -69,8 +70,9 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<User> findById(@PathVariable Long id) {
-		return new ResponseEntity<User>(userService.findById(id), HttpStatus.OK);
+	public String findById(@PathVariable Long id, Model model) {
+		model.addAttribute("user", userService.findById(id));
+		return "userProfile";
 	}
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
@@ -80,7 +82,8 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<User>> findUsers() {
-		return new ResponseEntity<List<User>>(userService.findUsers(), HttpStatus.OK);
+	public String findUsers(Model model) {
+		model.addAttribute("users", userService.findUsers());
+		return "users";
 	}
 }
