@@ -30,6 +30,7 @@
 							<property name="classesToBeBound">
 								<list>
 									<value>com.epam.mentorship.model.User</value>
+									<value>com.epam.mentorship.model.wrapper.UserWrapper</value>
 									<value>com.epam.mentorship.model.MentorshipProgram</value>
 								</list>
 							</property>
