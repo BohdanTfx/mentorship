@@ -7,6 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.epam.mentorship.aspect.annotation.BeforeSave;
+import com.epam.mentorship.aspect.annotation.BeforeUpdate;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User extends BaseEntity<Long> {
@@ -18,6 +21,42 @@ public class User extends BaseEntity<Long> {
 	private Date dateOfBirth;
 	@XmlElement
 	private JobTitle jobTitle;
+	private Date created;
+	private Date lastModified;
+	private User lastModifiedByUser;
+	private User createdByUser;
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
+	}
+
+	public User getLastModifiedByUser() {
+		return lastModifiedByUser;
+	}
+
+	public void setLastModifiedByUser(User lastModifiedByUser) {
+		this.lastModifiedByUser = lastModifiedByUser;
+	}
+
+	public User getCreatedByUser() {
+		return createdByUser;
+	}
+
+	public void setCreatedByUser(User createdByUser) {
+		this.createdByUser = createdByUser;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -49,5 +88,15 @@ public class User extends BaseEntity<Long> {
 
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+	
+	@BeforeUpdate
+	public void beforeUpdate() {
+		lastModified = new Date();
+	}
+	
+	@BeforeSave
+	public void beforeSave(){
+		created = new Date();
 	}
 }
