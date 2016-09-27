@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.epam.mentorship.aspect.annotation.Loggable;
 import com.epam.mentorship.dao.GenericDao;
 import com.epam.mentorship.exception.DatabaseException;
 import com.epam.mentorship.model.BaseEntity;
 
+@Loggable
 public class GenericJpaDao<T extends BaseEntity<ID>, ID extends Serializable> implements GenericDao<T, ID> {
 	private static final long serialVersionUID = 1L;
 	private Map<ID, T> database = new HashMap<>();
